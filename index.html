@@ -17,8 +17,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 25%, #ffd93d 50%, #6bcf7f 75%, #4ecdc4 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 10s ease infinite;
             overflow: hidden;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -51,16 +59,44 @@
         /* Konfeti animasi */
         .confetti {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            top: -50px;
+            width: 15px;
+            height: 15px;
             background: #f0f;
-            animation: fall 3s linear infinite;
+            animation: fall 4s linear infinite;
             pointer-events: none;
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
+            0% {
+                transform: translateY(-50px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0.5;
+            }
+        }
+
+        /* Balon animasi */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 50px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh) translateX(50px) rotate(20deg);
+                opacity: 0;
             }
         }
 
@@ -71,109 +107,245 @@
 
         .birthday-text {
             color: white;
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: bold;
-            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                         0 0 40px rgba(255, 255, 255, 0.6),
+                         0 8px 15px rgba(0, 0, 0, 0.3);
             margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
+            animation: bounce 1.5s ease-in-out infinite, glow 2s ease-in-out infinite;
         }
 
         .name {
-            color: #ffd700;
-            font-size: 5rem;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            color: #fff;
+            font-size: 6rem;
+            font-weight: 900;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 1),
+                         0 0 60px rgba(255, 215, 0, 0.8),
+                         0 10px 20px rgba(0, 0, 0, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+            letter-spacing: 0.1em;
         }
 
         @keyframes bounce {
             0%, 100% {
-                transform: translateY(0);
+                transform: translateY(0) scale(1);
             }
             50% {
-                transform: translateY(-20px);
+                transform: translateY(-30px) scale(1.05);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                             0 0 40px rgba(255, 255, 255, 0.6),
+                             0 8px 15px rgba(0, 0, 0, 0.3);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(255, 255, 255, 1),
+                             0 0 60px rgba(255, 215, 0, 0.8),
+                             0 8px 15px rgba(0, 0, 0, 0.3);
             }
         }
 
         .start-btn {
-            margin-top: 40px;
-            padding: 20px 60px;
-            font-size: 1.5rem;
+            margin-top: 50px;
+            padding: 25px 80px;
+            font-size: 2rem;
             font-weight: bold;
-            color: #667eea;
-            background: white;
-            border: none;
-            border-radius: 50px;
+            color: white;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            border: 4px solid white;
+            border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
+                        0 0 30px rgba(255, 107, 107, 0.6);
             transition: all 0.3s ease;
             position: relative;
             z-index: 10;
+            animation: buttonPulse 2s ease-in-out infinite;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
+                            0 0 30px rgba(255, 107, 107, 0.6);
+            }
+            50% {
+                box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5),
+                            0 0 50px rgba(255, 107, 107, 1);
+            }
         }
 
         .start-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5),
+                        0 0 60px rgba(255, 107, 107, 1);
         }
 
         .start-btn:active {
-            transform: translateY(-2px);
+            transform: translateY(-4px) scale(1.02);
         }
 
         /* Layar Kedua */
         #wishes-screen {
             text-align: center;
-            max-width: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .wishes-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+            padding: 60px;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4),
+                        0 0 60px rgba(255, 215, 0, 0.3);
+            max-width: 800px;
+            border: 5px solid rgba(255, 215, 0, 0.5);
+            animation: cardAppear 1s ease-out;
+        }
+
+        @keyframes cardAppear {
+            0% {
+                transform: scale(0.5) rotateY(180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotateY(0deg);
+                opacity: 1;
+            }
         }
 
         .wishes-title {
-            color: #667eea;
-            font-size: 2.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53, #ffd93d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3rem;
             margin-bottom: 30px;
-            font-weight: bold;
+            font-weight: 900;
+            animation: titleShine 3s ease-in-out infinite;
+        }
+
+        @keyframes titleShine {
+            0%, 100% {
+                filter: brightness(1);
+            }
+            50% {
+                filter: brightness(1.3);
+            }
         }
 
         .wishes-text {
             color: #333;
-            font-size: 1.3rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
+            font-size: 1.4rem;
+            line-height: 2;
+            margin-bottom: 25px;
+            font-weight: 500;
+            animation: fadeInUp 1s ease-out backwards;
         }
 
-        .wishes-text:last-child {
+        .wishes-text:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .wishes-text:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .wishes-text:nth-child(5) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .wishes-text:last-of-type {
             margin-bottom: 0;
         }
 
         .emoji {
-            font-size: 2rem;
-            margin: 20px 0;
+            font-size: 3rem;
+            margin: 25px 0;
+            animation: emojiSpin 3s ease-in-out infinite;
+        }
+
+        @keyframes emojiSpin {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(-10deg) scale(1.1);
+            }
+            75% {
+                transform: rotate(10deg) scale(1.1);
+            }
+        }
+
+        /* Bintang berkilau */
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkleAnim 2s ease-in-out infinite;
+            pointer-events: none;
+            box-shadow: 0 0 10px white;
+        }
+
+        @keyframes sparkleAnim {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
         }
 
         /* Responsif */
         @media (max-width: 768px) {
             .birthday-text {
-                font-size: 2.5rem;
-            }
-            .name {
                 font-size: 3rem;
             }
+            .name {
+                font-size: 3.5rem;
+            }
             .start-btn {
-                padding: 15px 40px;
-                font-size: 1.2rem;
+                padding: 20px 50px;
+                font-size: 1.5rem;
             }
             .wishes-card {
-                padding: 30px;
+                padding: 40px 30px;
             }
             .wishes-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             .wishes-text {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -183,7 +355,7 @@
         <!-- Layar Pertama: Welcome -->
         <div id="welcome-screen" class="screen active">
             <div class="birthday-text">
-                🎂 Happy Birthday 🎂
+                🎂 HAPPY BIRTHDAY 🎂
             </div>
             <div class="name">DANDI</div>
             <button class="start-btn" id="startBtn">START</button>
@@ -209,17 +381,51 @@
     </div>
 
     <script>
-        // Fungsi untuk membuat konfeti
+        // Fungsi untuk membuat konfeti dari atas
         function createConfetti() {
-            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffd93d', '#6bcf7f', '#a29bfe'];
-            for (let i = 0; i < 50; i++) {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffd93d', '#6bcf7f', '#a29bfe', '#ff8e53', '#ff6348'];
+            const shapes = ['■', '●', '▲', '★', '♥', '◆'];
+            
+            for (let i = 0; i < 100; i++) {
                 const confetti = document.createElement('div');
                 confetti.className = 'confetti';
                 confetti.style.left = Math.random() * 100 + '%';
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.animationDelay = Math.random() * 3 + 's';
-                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                confetti.innerHTML = shapes[Math.floor(Math.random() * shapes.length)];
+                confetti.style.color = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                confetti.style.fontWeight = 'bold';
                 document.body.appendChild(confetti);
+            }
+        }
+
+        // Fungsi untuk membuat balon
+        function createBalloons() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffd93d', '#6bcf7f', '#a29bfe', '#ff8e53'];
+            
+            for (let i = 0; i < 20; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + '%';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDelay = Math.random() * 3 + 's';
+                balloon.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                document.body.appendChild(balloon);
+            }
+        }
+
+        // Fungsi untuk membuat bintang berkilau
+        function createSparkles() {
+            for (let i = 0; i < 50; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 2 + 's';
+                sparkle.style.animationDuration = (Math.random() * 1 + 1) + 's';
+                document.body.appendChild(sparkle);
             }
         }
 
@@ -235,15 +441,28 @@
             setTimeout(() => {
                 welcomeScreen.classList.remove('active');
                 wishesScreen.classList.add('active');
+                // Tambah lebih banyak konfeti saat masuk ke layar kedua
                 createConfetti();
+                createBalloons();
             }, 1000);
         }
 
         // Event listener untuk tombol start
         document.getElementById('startBtn').addEventListener('click', showWishes);
 
-        // Buat konfeti saat halaman dimuat
+        // Buat efek saat halaman dimuat
         createConfetti();
+        createBalloons();
+        createSparkles();
+
+        // Refresh konfeti setiap 5 detik
+        setInterval(() => {
+            createConfetti();
+        }, 5000);
+
+        setInterval(() => {
+            createBalloons();
+        }, 4000);
     </script>
 </body>
 </html>
