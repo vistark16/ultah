@@ -40,10 +40,12 @@
             padding: 20px;
             opacity: 0;
             transition: opacity 1s ease-in-out;
+            pointer-events: none;
         }
 
         .screen.active {
             opacity: 1;
+            pointer-events: auto;
         }
 
         /* Konfeti animasi */
@@ -53,6 +55,7 @@
             height: 10px;
             background: #f0f;
             animation: fall 3s linear infinite;
+            pointer-events: none;
         }
 
         @keyframes fall {
@@ -102,6 +105,8 @@
             cursor: pointer;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 10;
         }
 
         .start-btn:hover {
@@ -181,7 +186,7 @@
                 🎂 Happy Birthday 🎂
             </div>
             <div class="name">DANDI</div>
-            <button class="start-btn" onclick="showWishes()">START</button>
+            <button class="start-btn" id="startBtn">START</button>
         </div>
 
         <!-- Layar Kedua: Ucapan & Doa -->
@@ -220,6 +225,7 @@
 
         // Fungsi untuk transisi ke layar ucapan
         function showWishes() {
+            const welcomeScreen = document.getElementById('welcome-screen');
             const wishesScreen = document.getElementById('wishes-screen');
             
             // Fade out layar pertama
@@ -232,6 +238,9 @@
                 createConfetti();
             }, 1000);
         }
+
+        // Event listener untuk tombol start
+        document.getElementById('startBtn').addEventListener('click', showWishes);
 
         // Buat konfeti saat halaman dimuat
         createConfetti();
