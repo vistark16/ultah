@@ -1,1 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Dandi! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .screen.active {
+            opacity: 1;
+        }
+
+        /* Konfeti animasi */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #f0f;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Layar Pertama */
+        #welcome-screen {
+            text-align: center;
+        }
+
+        .birthday-text {
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .name {
+            color: #ffd700;
+            font-size: 5rem;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .start-btn {
+            margin-top: 40px;
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            background: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .start-btn:active {
+            transform: translateY(-2px);
+        }
+
+        /* Layar Kedua */
+        #wishes-screen {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .wishes-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .wishes-title {
+            color: #667eea;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .wishes-text {
+            color: #333;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .wishes-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .emoji {
+            font-size: 2rem;
+            margin: 20px 0;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .birthday-text {
+                font-size: 2.5rem;
+            }
+            .name {
+                font-size: 3rem;
+            }
+            .start-btn {
+                padding: 15px 40px;
+                font-size: 1.2rem;
+            }
+            .wishes-card {
+                padding: 30px;
+            }
+            .wishes-title {
+                font-size: 2rem;
+            }
+            .wishes-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Layar Pertama: Welcome -->
+        <div id="welcome-screen" class="screen active">
+            <div class="birthday-text">
+                🎂 Happy Birthday 🎂
+            </div>
+            <div class="name">DANDI</div>
+            <button class="start-btn" onclick="showWishes()">START</button>
+        </div>
+
+        <!-- Layar Kedua: Ucapan & Doa -->
+        <div id="wishes-screen" class="screen">
+            <div class="wishes-card">
+                <div class="wishes-title">Selamat Ulang Tahun, Dandi! 🎉</div>
+                <div class="emoji">🎈✨🎁</div>
+                <p class="wishes-text">
+                    Semoga di usia yang baru ini, kamu selalu diberkahi dengan kesehatan, kebahagiaan, dan kesuksesan dalam segala hal yang kamu lakukan.
+                </p>
+                <p class="wishes-text">
+                    Semoga semua impian dan cita-citamu tercapai, dan setiap langkahmu selalu dimudahkan oleh Yang Maha Kuasa.
+                </p>
+                <p class="wishes-text">
+                    Tetap menjadi pribadi yang baik, penuh semangat, dan menginspirasi banyak orang di sekitarmu!
+                </p>
+                <div class="emoji">🥳💫🎊</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk membuat konfeti
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#ffd93d', '#6bcf7f', '#a29bfe'];
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 3 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+            }
+        }
+
+        // Fungsi untuk transisi ke layar ucapan
+        function showWishes() {
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const wishesScreen = document.getElementById('wishes-screen');
+            
+            // Fade out layar pertama
+            welcomeScreen.style.opacity = '0';
+            
+            // Setelah animasi selesai, tampilkan layar kedua
+            setTimeout(() => {
+                welcomeScreen.classList.remove('active');
+                wishesScreen.classList.add('active');
+                createConfetti();
+            }, 1000);
+        }
+
+        // Buat konfeti saat halaman dimuat
+        createConfetti();
+    </script>
+</body>
+</html>
